@@ -32,6 +32,12 @@ class User(AbstractUser):
         related_name='users',
         verbose_name="Должность"
     )
+    telegram_id = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name="Telegram ID"
+    )
 
     class Meta:
         verbose_name = "Сотрудник"

@@ -122,3 +122,18 @@ SPECTACULAR_SETTINGS = {
 }
 
 AUTH_USER_MODEL = 'users.User'
+
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
+
+
+CELERY_BEAT_SCHEDULE = {
+    'check-deadlines-every-hour': {
+        'task': 'tracker.tasks.check_deadlines',
+        'schedule': 60.0, # Раз в час (в секундах 3600.00). Для теста можно поставить 60.0 (раз в минуту)
+    },
+}
