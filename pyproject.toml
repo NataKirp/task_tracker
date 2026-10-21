@@ -55,6 +55,8 @@ omit = [
     "*/tests.py",
     "manage.py",
     "config/*",
+    "*/urls.py",
+    "tracker/tests_*.py",
 ]
 
 [tool.coverage.report]
