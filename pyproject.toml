@@ -44,3 +44,23 @@ exclude = '\.git'
 [isort]
 line_length = 119
 force_single_line = true
+
+[tool.coverage.run]
+omit = [
+    "*/migrations/*",
+    "*/__init__.py",
+    "*/apps.py",
+    "*/admin.py",
+    "*/tests.py",
+    "manage.py",
+    "config/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
