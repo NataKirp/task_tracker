@@ -1,5 +1,7 @@
 from django.test import TestCase
-from .models import User, Position
+
+from .models import Position, User
+
 
 class UserModelTests(TestCase):
     """
@@ -17,7 +19,7 @@ class UserModelTests(TestCase):
             password="testpassword",
             first_name="Иван",
             last_name="Иванов",
-            position=self.position
+            position=self.position,
         )
 
     def test_position_str(self):
@@ -32,8 +34,7 @@ class UserModelTests(TestCase):
     def test_user_str_without_full_name(self):
         """Проверяем, что __str__ возвращает username, если ФИО не заполнено."""
         user_without_name = User.objects.create_user(
-            username="noname",
-            password="testpassword"
+            username="noname", password="testpassword"
         )
         self.assertEqual(str(user_without_name), "noname")
 

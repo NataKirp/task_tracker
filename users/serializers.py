@@ -21,7 +21,7 @@ class PositionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Position
-        fields = ['id', 'name']
+        fields = ["id", "name"]
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -45,22 +45,27 @@ class UserSerializer(serializers.ModelSerializer):
     # Поле для записи ID должности при создании/обновлении сотрудника
     position_id = serializers.PrimaryKeyRelatedField(
         queryset=Position.objects.all(),
-        source='position',  # Указываем, что это поле пишет напрямую в поле position модели
+        source="position",  # Указываем, что это поле пишет напрямую в поле position модели
         write_only=True,
-        required=False
+        required=False,
     )
 
     class Meta:
         model = User
         fields = [
-            'id', 'username', 'password', 'first_name', 'last_name',
-            'email', 'position', 'position_id', 'is_staff'
+            "id",
+            "username",
+            "password",
+            "first_name",
+            "last_name",
+            "email",
+            "position",
+            "position_id",
+            "is_staff",
         ]
 
         # Скрываем пароль из всех ответов API (безопасность)
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
+        extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
         """
@@ -78,7 +83,7 @@ class UserSerializer(serializers.ModelSerializer):
             User: Созданный объект сотрудника с зашифрованным паролем.
         """
         # Извлекаем пароль из данных, чтобы не передавать его напрямую в User.objects.create
-        password = validated_data.pop('password', None)
+        password = validated_data.pop("password", None)
 
         # Создаем объект пользователя
         user = User.objects.create(**validated_data)

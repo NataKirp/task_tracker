@@ -1,9 +1,11 @@
 import logging
 import os
-import requests
 from datetime import date, timedelta
+
+import requests
 from celery import shared_task
 from django.contrib.auth import get_user_model
+
 from .models import Task
 
 User = get_user_model()
@@ -18,16 +20,12 @@ def send_telegram_message(chat_id, text):
     Вспомогательная функция для отправки сообщения.
     При ошибке выводит предупреждение в терминал через logging.
     """
-    token = os.getenv('TELEGRAM_BOT_TOKEN')
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
     if not token or not chat_id:
         return False
 
     url = f"https://api.telegram.org/bot{token}/sendMessage"
-    payload = {
-        "chat_id": chat_id,
-        "text": text,
-        "parse_mode": "HTML"
-    }
+    payload = {"chat_id": chat_id, "text": text, "parse_mode": "HTML"}
 
     # proxies = {
     #     "http": "socks5h://127.0.0.1:1080",
@@ -43,7 +41,7 @@ def send_telegram_message(chat_id, text):
         logger.error(
             "Не удалось отправить сообщение в Telegram для chat_id=%s. "
             "Причина: нет связи с api.telegram.org (Network unreachable).",
-            chat_id
+            chat_id,
         )
         return False
     except requests.exceptions.Timeout:
@@ -65,9 +63,9 @@ def check_deadlines():
     # Ищем задачи: срок - завтра, статус не 'done', и у задачи есть исполнитель с telegram_id
     tasks = Task.objects.filter(
         due_date=tomorrow,
-        status__in=['new', 'in_progress'],
-        assignee__telegram_id__isnull=False
-    ).exclude(assignee__telegram_id='')
+        status__in=["new", "in_progress"],
+        assignee__telegram_id__isnull=False,
+    ).exclude(assignee__telegram_id="")
 
     for task in tasks:
         user = task.assignee

@@ -1,7 +1,10 @@
+from datetime import timedelta
+
 from django.test import TestCase
 from django.utils import timezone
-from datetime import timedelta
+
 from users.models import User
+
 from .models import Task
 from .serializers import TaskSerializer
 
@@ -16,7 +19,7 @@ class TaskModelTests(TestCase):
         self.parent_task = Task.objects.create(
             name="Родительская задача",
             due_date=timezone.now().date() + timedelta(days=7),
-            status="new"
+            status="new",
         )
 
     def test_task_str(self):
@@ -27,17 +30,17 @@ class TaskModelTests(TestCase):
         """
         Родительская задача НЕ должна закрываться, если есть незавершенные подзадачи.
         """
-        subtask2 = Task.objects.create(
+        Task.objects.create(
             name="Подзадача 2",
             parent_task=self.parent_task,
             due_date=timezone.now().date() + timedelta(days=2),
-            status="in_progress"
+            status="in_progress",
         )
-        subtask1 = Task.objects.create(
+        Task.objects.create(
             name="Подзадача 1",
             parent_task=self.parent_task,
             due_date=timezone.now().date() + timedelta(days=1),
-            status="done"
+            status="done",
         )
 
         # Обновляем статус родителя (чтобы сработал save(), но он не должен закрыться)
@@ -54,13 +57,13 @@ class TaskModelTests(TestCase):
             name="Подзадача 1",
             parent_task=self.parent_task,
             due_date=timezone.now().date() + timedelta(days=1),
-            status="in_progress"
+            status="in_progress",
         )
         subtask2 = Task.objects.create(
             name="Подзадача 2",
             parent_task=self.parent_task,
             due_date=timezone.now().date() + timedelta(days=2),
-            status="in_progress"
+            status="in_progress",
         )
 
         subtask1.status = "done"
@@ -87,11 +90,7 @@ class TaskSerializerTests(TestCase):
         past_date = timezone.now().date() - timedelta(days=1)
 
         # Создаем "сырые" данные, имитируя запрос от клиента
-        data = {
-            'name': 'Просроченная задача',
-            'status': 'new',
-            'due_date': past_date
-        }
+        data = {"name": "Просроченная задача", "status": "new", "due_date": past_date}
 
         serializer = TaskSerializer(data=data)
 
@@ -100,4 +99,4 @@ class TaskSerializerTests(TestCase):
         self.assertFalse(serializer.is_valid())
 
         # Проверяем, что ошибка привязана именно к полю due_date
-        self.assertIn('due_date', serializer.errors)
+        self.assertIn("due_date", serializer.errors)

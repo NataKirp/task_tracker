@@ -1,20 +1,20 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 class Position(models.Model):
     """
     Справочник должностей.
     """
+
     name = models.CharField(
-        max_length=255,
-        unique=True,
-        verbose_name="Название должности"
+        max_length=255, unique=True, verbose_name="Название должности"
     )
 
     class Meta:
         verbose_name = "Должность"
         verbose_name_plural = "Должности"
-        ordering = ['name']
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
@@ -24,19 +24,17 @@ class User(AbstractUser):
     """
     Кастомная модель пользователя (Сотрудника).
     """
+
     position = models.ForeignKey(
         Position,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name='users',
-        verbose_name="Должность"
+        related_name="users",
+        verbose_name="Должность",
     )
     telegram_id = models.CharField(
-        max_length=50,
-        blank=True,
-        null=True,
-        verbose_name="Telegram ID"
+        max_length=50, blank=True, null=True, verbose_name="Telegram ID"
     )
 
     class Meta:

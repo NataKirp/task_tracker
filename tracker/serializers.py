@@ -1,10 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from rest_framework import serializers
-from .models import Task
+
 from users.serializers import UserSerializer
 
+from .models import Task
+
 User = get_user_model()
+
 
 class TaskSerializer(serializers.ModelSerializer):
     """
@@ -17,6 +20,7 @@ class TaskSerializer(serializers.ModelSerializer):
        Это необходимо, чтобы клиент передавал только ID связанных сущностей,
        а не пытался создать их заново.
     """
+
     # Поля только для чтения (GET) - отдают вложенные объекты
     assignee = UserSerializer(read_only=True)
     parent_task = serializers.StringRelatedField(read_only=True)
@@ -24,25 +28,30 @@ class TaskSerializer(serializers.ModelSerializer):
     # Поля только для записи (POST/PUT/PATCH) - принимают ID связанных объектов
     assignee_id = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(),
-        source='assignee',
+        source="assignee",
         write_only=True,
         required=False,
-        allow_null=True
+        allow_null=True,
     )
     parent_task_id = serializers.PrimaryKeyRelatedField(
         queryset=Task.objects.all(),
-        source='parent_task',
+        source="parent_task",
         write_only=True,
         required=False,
-        allow_null=True
+        allow_null=True,
     )
 
     class Meta:
         model = Task
         fields = [
-            'id', 'name', 'status', 'due_date',
-            'assignee', 'assignee_id',
-            'parent_task', 'parent_task_id'
+            "id",
+            "name",
+            "status",
+            "due_date",
+            "assignee",
+            "assignee_id",
+            "parent_task",
+            "parent_task_id",
         ]
 
     def validate_due_date(self, value):
