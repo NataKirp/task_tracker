@@ -1,2 +1,235 @@
-﻿Текущая кодовая страница: 1251
 [
+{
+  "model": "users.position",
+  "pk": 1,
+  "fields": {
+    "name": "Backend-разработчик"
+  }
+},
+{
+  "model": "users.position",
+  "pk": 2,
+  "fields": {
+    "name": "QA-инженер"
+  }
+},
+{
+  "model": "users.position",
+  "pk": 3,
+  "fields": {
+    "name": "Системный аналитик"
+  }
+},
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$vMGCKBVTDoTHt4lI8vB0Rk$GkK/wly7M61pDnN0SpFXsOybQXCM/S1wYQqPbgdf29s=",
+    "last_login": "2026-10-21T14:10:57Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@example.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-10-21T14:10:20Z",
+    "position": null,
+    "telegram_id": "5762820112",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$ei20q5TY649abgI6leMLV3$+VdLwZYT7Wkq1KbfRYjf629f/kZdlrfTNzT7ExKbJYA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "ivan",
+    "first_name": "Иван",
+    "last_name": "Петров",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-21T14:19:59.365Z",
+    "position": 1,
+    "telegram_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$QL1DslkNdjXs6TFkvoajAX$zzxyglCkJemdMTwd7XZZPGq777G12HX70d8E3Oj/1SE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "anna",
+    "first_name": "Анна",
+    "last_name": "Смирнова",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-21T14:20:38.937Z",
+    "position": 2,
+    "telegram_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$sVfpVPGOjOG0QDKI6r5k1T$aevO+51CSkigaD6sN5tx1t3DIX2ZWtb7d9nIHjbVziI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "petr",
+    "first_name": "Петр",
+    "last_name": "Сидоров",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-21T14:21:41Z",
+    "position": 3,
+    "telegram_id": "5762820112",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 1,
+  "fields": {
+    "name": "Разработка модуля оплаты",
+    "parent_task": null,
+    "assignee": 4,
+    "due_date": "2026-11-23",
+    "status": "new"
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 2,
+  "fields": {
+    "name": "Написать API для эквайринга",
+    "parent_task": 1,
+    "assignee": 2,
+    "due_date": "2026-11-05",
+    "status": "in_progress"
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 3,
+  "fields": {
+    "name": "Сверстать главную страницу",
+    "parent_task": null,
+    "assignee": 2,
+    "due_date": "2026-10-24",
+    "status": "in_progress"
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 4,
+  "fields": {
+    "name": "Настроить CI/CD",
+    "parent_task": null,
+    "assignee": 2,
+    "due_date": "2026-10-26",
+    "status": "in_progress"
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 5,
+  "fields": {
+    "name": "Провести регрессионное тестирование",
+    "parent_task": null,
+    "assignee": 3,
+    "due_date": "2026-10-29",
+    "status": "in_progress"
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 6,
+  "fields": {
+    "name": "Собрать требования к проекту",
+    "parent_task": null,
+    "assignee": 4,
+    "due_date": "2026-10-20",
+    "status": "done"
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 7,
+  "fields": {
+    "name": "Функциональное тестирование API эквайринга",
+    "parent_task": 1,
+    "assignee": 3,
+    "due_date": "2026-11-12",
+    "status": "new"
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 8,
+  "fields": {
+    "name": "Интеграционное тестирование модуля «Личный кабинет студента»",
+    "parent_task": null,
+    "assignee": null,
+    "due_date": "2026-10-22",
+    "status": "done"
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 9,
+  "fields": {
+    "name": "Подготовка требований, матрицы трассировки и тестовых сценариев для модуля «Личный кабинет»",
+    "parent_task": 8,
+    "assignee": 4,
+    "due_date": "2026-10-26",
+    "status": "done"
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 10,
+  "fields": {
+    "name": "Развертывание тестового стенда, фикс багов и поддержка процесса тестирования «Личного кабинета»",
+    "parent_task": 8,
+    "assignee": 2,
+    "due_date": "2026-11-09",
+    "status": "done"
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 11,
+  "fields": {
+    "name": "Проведение функционального и регрессионного тестирования «Личного кабинета», регистрация дефектов",
+    "parent_task": 8,
+    "assignee": 3,
+    "due_date": "2026-11-23",
+    "status": "done"
+  }
+},
+{
+  "model": "tracker.task",
+  "pk": 12,
+  "fields": {
+    "name": "Согласовать макеты экранов с дизайнером.",
+    "parent_task": null,
+    "assignee": 4,
+    "due_date": "2026-10-22",
+    "status": "in_progress"
+  }
+}
+]
